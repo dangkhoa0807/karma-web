@@ -1,0 +1,45 @@
+<!-- Start Header Area -->
+<header class="header_area sticky-header">
+	<div class="main_menu">
+		<nav class="navbar navbar-expand-lg navbar-light main_box">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<a class="navbar-brand logo_h" routerLink="/admin"><img src="/assets/img/logo.png" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto">
+						<li class="nav-item "><a class="nav-link" routerLink="/admin/addProduct">Add Product</a>
+						</li>
+						<li class="nav-item"><a class="nav-link" routerLink="/admin">Products</a></li>
+						<li class="nav-item active"><a class="nav-link" routerLink="/admin/addCategory">Add Category</a>
+						</li>
+						<li class="nav-item submenu dropdown">
+							<a routerLink="/admin/categories" class="nav-link dropdown-toggle">Categories</a>
+
+						</li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
+<!-- End Header Area -->
+<div class="container " style="margin-bottom: 500px;">
+	<form class="form-add-product" [formGroup]="cateForm">
+		<div class="relative">
+			<input name="serial" rules="required" type="text" id="name" formControlName="name" />
+			<label for="name" class="form-label">Tên Danh Mục</label>
+		</div>
+
+		<button class="btn btn-addproduct" type="button" (click)="createCate()">Thêm Danh Mục</button>
+	</form>
+</div>

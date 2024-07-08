@@ -1,0 +1,113 @@
+<!-- Start Header Area -->
+<header class="header_area sticky-header">
+	<div class="main_menu">
+		<nav class="navbar navbar-expand-lg navbar-light main_box">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<a class="navbar-brand logo_h" routerLink="/admin"><img src="/assets/img/logo.png" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto">
+						<li class="nav-item "><a class="nav-link" routerLink="/admin/addProduct">Add Product</a></li>
+						<li class="nav-item active"><a class="nav-link" routerLink="/admin">Products</a></li>
+						<li class="nav-item "><a class="nav-link" routerLink="/admin/addCategory">Add Category</a></li>
+						<li class="nav-item submenu dropdown">
+							<a routerLink="/admin/categories" class="nav-link dropdown-toggle">Categories</a>
+
+						</li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
+<!-- End Header Area -->
+<div class="table-products ">
+	<div class="container ">
+		<table class="table ">
+			<thead>
+				<tr>
+					<th scope="col">STT</th>
+					<th scope="col">Tên SP</th>
+					<th scope="col">Ảnh</th>
+					<th scope="col">Giá</th>
+					<th scope="col">Giá sales</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody id="list-product" *ngIf="products">
+				<tr *ngFor="let product of products; let i=index">
+					<th scope="row">{{i + 1}}</th>
+					<td><h4 class="name">{{product.name}}</h4></td>
+					<td><img src="http://localhost:3000/public/images/{{product.image}}" class="img-fluid" width="200px" alt=""></td>
+					<td><span>{{product.price}}</span></td>
+					<td><span>{{product.price_sales}}</span></td>
+					<td>
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="showDetail(product._id)" >Edit</button>
+							<!-- //onclick="showDetail('{{product._id}}')" -->
+							<button type="button" class="btn btn-danger" (click)="deleteProduct(product._id)" 
+								>Delete</button>
+					</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<!-- Modal -->
+<form class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="formProduct" (submit)="updateProduct()">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h2 class="modal-title fs-5" id="exampleModalLabel">Update Product</h2>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+		</div>
+		<div class="modal-body">
+		  <div class="form-edit" *ngIf="product">
+			<div class="relative">
+			  <input name="serial" rules="required" type="text" id="name" formControlName="name" />
+			  <label for="name" class="form-label">Tên sản phẩm</label>
+			</div>
+  
+			<div class="relative">
+			  <input name="serial" rules="required" type="text" id="price" formControlName="price" />
+			  <label for="price" class="form-label">Giá</label>
+			</div>
+  
+			<div class="relative">
+			  <input name="serial" rules="required" type="text" id="price_sales" formControlName="priceSales" />
+			  <label for="price_sales" class="form-label">Giá sales</label>
+			</div>
+  
+			<div class="relative">
+			  <label for="category_id" class="select">Danh mục</label>
+			  <select id="category_id" *ngIf="categories" formControlName="category"> 
+				<option *ngFor="let category of categories" [value]="category._id">
+				  {{category.name}}
+				</option>
+			  </select>
+			</div>
+  
+			<input type="hidden" name="id" formControlName="_id">
+			<input type="file" id="img" name="img" formControlName="image" (change)="onFileChange($event)" />
+			<label for="file-input" class="sr-only">Choose file</label>
+		  </div>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <button type="submit" class="btn btn-addproduct">Save changes</button>
+		</div>
+	  </div>
+	</div>
+  </form>

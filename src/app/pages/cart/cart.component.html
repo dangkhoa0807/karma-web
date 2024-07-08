@@ -1,0 +1,120 @@
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Shopping Cart</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="category.html">Cart</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"class="w-50" >Product</th>        
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                            <th scope="col"></th>
+                        </tr>   
+                    </thead>
+                    <tbody class="listProduct" *ngIf="cart.length">
+                        <tr class="product" *ngFor="let product of cart">
+                          <td scope="row" >
+                            <div class="media">
+                              <div class="d-flex">
+                                <img [src]="product.imgProduct" style="width: 200px;" alt="">
+                              </div>
+                              <div class="media-body">
+                                <p class="name">{{ product.name }}</p>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <h5 class="price">{{ product.price.toLocaleString('vi', { style: 'currency', currency: 'VND' }) }}</h5>
+                          </td>
+                          <td>
+                            <div class="product_count qty">
+                              <input type="number" [(ngModel)]="product.qty" class="input-text qty" >
+                              <button (click)="increaseQuantity(product)" class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+                              <button (click)="decreaseQuantity(product)" class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+                            </div>
+                          </td>
+                          <td>
+                            <h5 class="total">{{ (product.price * product.qty).toLocaleString('vi', { style: 'currency', currency: 'VND' }) }}</h5>
+                          </td>
+                          <td>
+                            <button (click)="removeProduct(product.id)" class="btn btn-black close delete">x</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    <tr class="bottom_button" colspan="10">
+                        <td>
+                            <a class="gray_btn" href="#">Update Cart</a>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <div class="cupon_text d-flex align-items-center">
+                                <input type="text" placeholder="Coupon Code">
+                                <a class="primary-btn" href="#">Apply</a>
+                                <a class="gray_btn" href="#">Close Coupon</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <h5>Subtotal</h5>
+                        </td>
+                        <td>
+                            <h5 id="subTotal"></h5>
+                        </td>
+                    </tr>
+                    <tr class="shipping_area">
+
+
+                    <tr class="out_button_area">
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <div class="checkout_btn_inner d-flex align-items-center">
+                                <a class="gray_btn" href="#">Continue Shopping</a>
+                                <button class="primary-btn" id="checkoutBtn">Proceed to checkout</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->

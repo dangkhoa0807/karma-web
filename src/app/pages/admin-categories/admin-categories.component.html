@@ -1,0 +1,86 @@
+<!-- Start Header Area -->
+<header class="header_area sticky-header">
+	<div class="main_menu">
+		<nav class="navbar navbar-expand-lg navbar-light main_box">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<a class="navbar-brand logo_h" routerLink="/admin"><img src="/assets/img/logo.png" alt=""></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+					<ul class="nav navbar-nav menu_nav ml-auto">
+						<li class="nav-item "><a class="nav-link" routerLink="/admin/addProduct">Add Product</a></li>
+						<li class="nav-item "><a class="nav-link" routerLink="/admin">Products</a></li>
+						<li class="nav-item "><a class="nav-link" routerLink="/admin/addCategory">Add Category</a></li>
+						<li class="nav-item active">
+							<a routerLink="/admin/categories" class="nav-link dropdown-toggle">Categories</a>
+
+						</li>
+
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</div>
+</header>
+<div class="table-category">
+	<div class="container">
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">STT</th>
+					<th scope="col">Tên danh mục</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody id="list-category" *ngIf="categories">
+				<tr *ngFor=" let category of categories; let i = index">
+					<th scope="row">{{i+1}}</th>
+					<td>
+						<h4 class="name">{{category.name}}</h4>
+					</td>
+					<td>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+							data-bs-target="#exampleModal" (click)="showDetail(category._id)">Edit</button>
+						<button type="button" class="btn btn-danger"
+							(click)="deleteCate(category._id)">Delete</button>
+					</td>
+				</tr>
+
+
+			</tbody>
+		</table>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title fs-5" id="exampleModalLabel">Update Product</h2>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+			</div>
+			<div class="modal-body" *ngIf="category">
+				<div class="form-edit">
+					<div class="relative">
+						<input name="serial" rules="required" type="text" id="name" [(ngModel)]="category.name"
+							class="" />
+						<label for="name" class="form-label">Tên Danh mục</label>
+					</div>
+					<input type="hidden" name="id" [(ngModel)]="category._id">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-addproduct" (click)="updateCate()">Save changes</button>
+			</div>
+		</div>
+	</div>
+</div>
